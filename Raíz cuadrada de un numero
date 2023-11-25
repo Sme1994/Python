@@ -1,0 +1,11 @@
+import math
+
+def square_into_integer(n):
+    # Calcula la raíz cuadrada de n usando la función sqrt de la biblioteca math
+    result = math.sqrt(n)
+    
+    # Imprime el resultado como un número entero usando la función int()
+    print(int(result))
+
+# Solicita al usuario ingresar un número y llama a la función
+square_into_integer(int(input()))
