@@ -1,0 +1,58 @@
+# Import necessary components from the flet library
+from flet import *
+
+# Create two text fields for user input
+txt_number1 = flet.TextField(value="0", text_align="right", width=250)
+txt_number2 = flet.TextField(value="0", text_align="right", width=250)
+
+# Define the main function that takes a Page object as a parameter
+def main(page: Page):
+    # Set the window width and height of the page
+    page.window_width = 300
+    page.window_height = 600
+    page.update()
+
+    # Check if either text field is empty and display an error message
+    if not txt_number1.value or not txt_number2.value:
+        txt_number1.error_text = "Please enter digit"
+        txt_number2.error_text = "Please enter digit"
+    else:
+        # Define function for addition
+        def suma(e):
+            result = int(txt_number1.value) + int(txt_number2.value)
+            page.add(flet.Text(str(result), color="blue"))
+            page.update()
+
+        # Define function for subtraction
+        def resta(e):
+            result = int(txt_number1.value) - int(txt_number2.value)
+            page.add(flet.Text(str(result), color="blue"))
+            page.update()
+
+        # Define function for multiplication
+        def producto(e):
+            result = int(txt_number1.value) * int(txt_number2.value)
+            page.add(flet.Text(str(result), color="blue"))
+            page.update()
+
+        # Define function for division
+        def divicion(e):
+            if int(txt_number2.value) <= 0:
+                page.add(flet.Text(str("Division by 0 is not possible. Please enter a number greater than 0."), color="blue"))
+            else:
+                result = int(txt_number1.value) / int(txt_number2.value)
+                page.add(flet.Text(str(result), color="blue"))
+                page.update()
+
+        # Add components to the page (text fields, buttons, and their corresponding click event functions)
+        page.add(
+            txt_number1,
+            txt_number2,
+            flet.ElevatedButton("Suma", on_click=suma),
+            flet.ElevatedButton("Resta", on_click=resta),
+            flet.ElevatedButton("Producto", on_click=producto),
+            flet.ElevatedButton("Division", on_click=divicion),
+        )
+
+# Run the application with the main function as the target
+flet.app(target=main)
