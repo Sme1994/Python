@@ -1,0 +1,43 @@
+import os
+
+# Function to clear the terminal screen based on the operating system
+def limpiar_terminal():
+    sistema_operativo = os.name
+    comando_limpiar = 'clear' if sistema_operativo == 'posix' else 'cls'
+    os.system(comando_limpiar)
+
+# Main function that contains the program logic
+def main():
+    while True:
+        # Displaying the menu options
+        print("\n ----------MENU----------\n",
+              "1- Crear archivo de texto\n",
+              "2- Continuar escribiendo\n",
+              "3 - Leer contenido del archivo\n",
+              "4 - Salir\n")
+        
+        # User input for menu option
+        opc = int(input("Opcion: "))
+
+        if opc == 1:
+            # Option 1: Create a text file in write mode (if it doesn't exist) and write initial content
+            with open('ejemplo.txt', 'w') as archivo:
+                archivo.write(input("\nAgrega el texto: "))
+        elif opc == 2:
+            # Option 2: Append new lines to the existing text file
+            with open("ejemplo.txt", 'a') as archivo:
+                texto_a_agregar = input("\nAgrega el texto: ")
+                archivo.write("\n" + texto_a_agregar)
+        elif opc == 3:
+            # Option 3: Clear the terminal, read and print the content of the text file
+            limpiar_terminal()
+            with open("ejemplo.txt", 'r') as archivo:
+                contenido = archivo.read()
+                print(contenido)
+        elif opc == 4:
+            # Option 4: Exit the program
+            break
+
+# Entry point of the script
+if __name__ == "__main__":
+    main()
